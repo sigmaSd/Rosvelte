@@ -16,17 +16,13 @@
 
     // Only one active station per app
     let activeStation: HTMLAudioElement;
-
-    let stations: any;
-
-    getStations().then((s) => (stations = s));
 </script>
 
 <main>
     <h1>Radio</h1>
-    {#if stations}
+    {#await getStations() then stations}
         <Stations title="Local Stations" {stations} bind:activeStation />
-    {/if}
+    {/await}
     <br />
     <SearchStations bind:activeStation />
 </main>
